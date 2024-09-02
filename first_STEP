@@ -1,0 +1,26 @@
+What we need:
+1. A mobile phone with root privileges
+2. Android development environment
+3. A team member
+
+To decrypt WeChat messages : 
+
+1. Get WeChat chat history
+WeChat chat history is saved in"/data/data/com.tencent.mm/MicroMsg/c5fb89d4729f72c345711cb*/EnMicroMsg.db"
+
+This file is an encrypted database file that needs to be opened with sqlcipher.
+The password is: the first seven digits of MD5 (IMEI + WeChat UIN)
+
+MD5 ('mm' + WeChat UIN).
+
+In the first step, it is not possible to go directly to EnMicroMsg.db. No permissions, but also to avoid conflict with WeChat itself, 
+so choose to copy this file to your own project:
+
+
+oldPath ="/data/data/com.tencent.mm/MicroMsg/c5fb89d4729f72c345711cb**\***/EnMicroMsg.db";
+ newPath="/data/data/com.your project/EnMicroMsg.db";
+ copyFile (oldPath, newPath);
+
+ 
+
+
